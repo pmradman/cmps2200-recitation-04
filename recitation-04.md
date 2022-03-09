@@ -28,7 +28,7 @@ def run_map_reduce(map_f, reduce_f, docs)
 
 To use this function to count words, you'll need to implement your own `map_f` and `reduce_f` functions, described below.
 
-1. Complete `word_count_map` and test it with `test_word_count_map`.
+1. Complete `word_count_map` and test it with `test_word_count_map`. Please use doc.split() to split a string. 
 
 2. Complete `word_count_reduce` and test it with `test_word_count_reduce`.
 
