@@ -1,6 +1,6 @@
 # CMPS 2200  Recitation 04
 
-**Name (Team Member 1):**_________________________  
+**Name (Team Member 1):**_____Petra Radmanovic______  
 **Name (Team Member 2):**_________________________
 
 
@@ -36,8 +36,10 @@ To use this function to count words, you'll need to implement your own `map_f` a
 
 4. Assume that a word `w` appears `n` times. What is the **work** and **span** of `word_count_reduce` for this word, assuming a parallel implementation of the `reduce` function?
 
-**Enter answer here**
+The work would be O(n) and the span would be S(log n)
+When We call word_count_reduce, we need to take into account how the parallel reduce function affects the work and span of the program. At every call, the reduce fucntion splits the input and performs one combine at each node, meaning the tree is balanced and would have O(n) runtime. When we reduce the n values, we have n-1 nodes on the inside to get to a singular total using reduce. Given an input of size n, we basically traverse the balanced tree down to the botom, taking n-1 steps. O(n-1) is equal to O(n). 
 
+For the span, we need ot look at the work done for the single longest sequential run when parallizing. Since again, the work done at each level is one combind O(1), we need to look at the depth of the tree in order to know how many nodes are done sequentially for the span. The depth of the tree is log n, so we have O(log n) span along the critical path when using these functions. 
 
 5. Why are we going through all this trouble? Couldn't I just use this function to count words?
 
@@ -52,7 +54,7 @@ for doc in docs:
 
 What is the problem that prevents us from easily parallelizing this solution?
 
-**Enter answer here**
+In this code, we edit one epmty dictionary in order to get the count. if we were to do this inparallel, it would be exptremely difficult to edit the same dictionary without getting mixed up. If both processors were trying to edit the same dictionary, they could end up working ont he same thing and edit it simultaneously, leading to misinforation about the copunt since the line when editing the dictionary is actuyally several different steps and not just one. 
 
 
 ## Part 2: Sentiment analysis
